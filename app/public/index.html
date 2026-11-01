@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kubernetes Pod Information</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">KUBERNETES / DOWNWARD API</p>
+        <h1>Inside this Pod</h1>
+        <p class="intro">Real deployment identity. No cluster API credentials required.</p>
+      </div>
+      <span class="badge">POD INSPECTOR</span>
+    </header>
+
+    <div class="toolbar">
+      <p id="status" role="status" aria-live="polite">Loading deployment information...</p>
+      <div class="controls">
+        <label><input id="auto-refresh" type="checkbox" checked> Refresh every 5 seconds</label>
+        <button id="refresh" type="button">Refresh now</button>
+      </div>
+    </div>
+
+    <section class="network" aria-label="Pod and node networking">
+      <article class="card node">
+        <p class="eyebrow">HOST NODE</p>
+        <h2>Node IP</h2>
+        <p class="address" data-field="nodeIP">Loading...</p>
+        <p class="subtle" data-field="nodeName">Loading...</p>
+      </article>
+      <article class="card pod">
+        <p class="eyebrow">THIS CONTAINER'S POD</p>
+        <h2>Pod IP</h2>
+        <p class="address" data-field="podIP">Loading...</p>
+        <p class="subtle" data-field="podName">Loading...</p>
+      </article>
+    </section>
+
+    <section class="details">
+      <article class="card">
+        <h2>Deployment identity</h2>
+        <dl>
+          <div><dt>Node name</dt><dd data-field="nodeName">Loading...</dd></div>
+          <div><dt>Pod name</dt><dd data-field="podName">Loading...</dd></div>
+          <div><dt>Pod UID</dt><dd data-field="podUID">Loading...</dd></div>
+          <div><dt>Namespace</dt><dd data-field="namespace">Loading...</dd></div>
+          <div><dt>Service account</dt><dd data-field="serviceAccount">Loading...</dd></div>
+          <div><dt>Container port</dt><dd data-field="containerPort">Loading...</dd></div>
+        </dl>
+      </article>
+      <article class="card">
+        <h2>Configured resources</h2>
+        <dl>
+          <div><dt>CPU request</dt><dd data-field="cpuRequestMillicores" data-unit="mCPU">Loading...</dd></div>
+          <div><dt>CPU limit</dt><dd data-field="cpuLimitMillicores" data-unit="mCPU">Loading...</dd></div>
+          <div><dt>Memory request</dt><dd data-field="memoryRequestBytes" data-unit="bytes">Loading...</dd></div>
+          <div><dt>Memory limit</dt><dd data-field="memoryLimitBytes" data-unit="bytes">Loading...</dd></div>
+        </dl>
+        <p class="note">1,000 mCPU = 1 CPU core. These are container settings at startup,
+          not live CPU or memory usage.</p>
+      </article>
+    </section>
+
+    <section class="card request" aria-labelledby="request-heading">
+      <h2 id="request-heading">This request</h2>
+      <dl>
+        <div><dt>UTC time</dt><dd data-field="requestTime">Loading...</dd></div>
+        <div><dt>Request ID</dt><dd data-field="requestID">Loading...</dd></div>
+      </dl>
+    </section>
+
+    <footer>
+      <p>Metadata is injected by Kubernetes. A plain Docker run needs explicit environment variables.</p>
+      <a href="https://kubernetes.io/docs/concepts/workloads/pods/downward-api/"
+         target="_blank" rel="noopener noreferrer">How the Downward API works</a>
+    </footer>
+  </main>
+</body>
+</html>
